@@ -1,0 +1,15 @@
+{
+  "start_description": "You are home alone.\nPeople or monsters will come knocking on the door.\nIt is your decision to make sure they don't get in.",
+  "visitors": {
+    "1": {
+      "name" : "Anna",
+      "type": "monster",
+      "ans": "I just came to pick up my mail from your mom"
+    },
+    "2": {
+      "name" : "John",
+      "type": "human",
+      "ans": "I came to clean the fridge"
+    }
+  }
+}
