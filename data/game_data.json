@@ -4,12 +4,24 @@
     "1": {
       "name" : "Anna",
       "type": "monster",
-      "ans": "I just came to pick up my mail from your mom"
+      "ans": "I just came to pick up my mail from your mom",
+      "note": "Mail should be out in the mailbox, don't worry about it!!"
     },
     "2": {
       "name" : "John",
       "type": "human",
-      "ans": "I came to clean the fridge"
+      "ans": "I came to clean the fridge",
+      "note": "My friend is coming to take some groceries"
+    }
+  },
+  "Room": {
+    "LivingRoom": {
+      "fridge": {
+        "inspected": "There is a note attached"
+      },
+      "TableTop": {
+        "inspected": "There is a door key"
+      }
     }
   }
 }
