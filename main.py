@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 import random
 
-from game import monster
 from game.monster import Visitor
 
 
@@ -20,18 +19,28 @@ def generateVisitor():
     data = getGameData()
     visitors = data['visitors']
     visitArray = [
-    Visitor(visitors[key]['name'],visitors[key]['type'],visitors[key]['ans'])
+    Visitor(visitors[key]['name'],visitors[key]['type'],visitors[key]['ans'],visitors[key]['note'],False)
         for key in visitors
     ]
     random.shuffle(visitArray)
     return visitArray
 
-def inspect():
-    # Write the function to look around the room
-    pass
+def inspect(gameInfo,visitor):
+    infoWhere = input("Enter Item:")
+    roomInfo = gameInfo["Room"]
+    if infoWhere == "room":
+        print("In the room,there are:")
+        for obj in roomInfo["LivingRoom"].values():
+            print(obj["Description"])
+    if infoWhere in roomInfo["LivingRoom"]:
+        print("You inspected ", infoWhere)
+        print(roomInfo["LivingRoom"][infoWhere]['inspected'])
+    if infoWhere == 'note':
+        print(visitor.get_note())
 
-def ask_person():
+def ask_person(visitor):
     # Write function for asking the person
+    print(f'{visitor.name} said : {visitor.Ans}')
     pass
 
 def open_Door(visitor,count):
@@ -53,9 +62,6 @@ def close_Door(visitor,count):
     count +=1
     return count
 
-def inventory():
-    #write a loop for displaying all the items in the inventory
-    pass
 
 def start_game():
     game_info = getGameData()
@@ -63,15 +69,31 @@ def start_game():
     running = True
     count = 0
     visitors = generateVisitor()
-    inventory = []
-    removedItems = set()
+    commands = ['open','close','inspect','help','ask','quit']
     while running:
         visitor = visitors[count]
+        if not visitor.introState:
+            print(f"{visitor.name} said: Hello I am here")
+            visitor.introState = True
         cm = input("Enter command: ")
+        print("----------------------------")
         if cm == "open":
             count = open_Door(visitor,count)
         if cm == "close":
             count = close_Door(visitor,count)
+        if cm == "inspect":
+            inspect(game_info,visitor)
+        if cm == "help":
+            print("The available commands are: ")
+            for com in commands:
+                print(com)
+        if cm == "ask":
+            ask_person(visitor)
+        if cm == 'quit':
+            print("Thank you for playing!")
+            sys.exit()
+
+
 
         if count >= len(visitors):
             print("No more visitors are coming")
