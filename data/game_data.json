@@ -17,9 +17,11 @@
   "Room": {
     "LivingRoom": {
       "fridge": {
-        "inspected": "There is a note attached"
+        "Description" : "Fridge",
+        "inspected": "There is a note"
       },
-      "TableTop": {
+      "table": {
+        "Description" : "Table",
         "inspected": "There is a door key"
       }
     }
